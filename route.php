@@ -2,4 +2,4 @@
 
 use Core\Route;
 
-Route::get('home/{id}/{name}/{home}', 'HomeController@index');
+Route::get('home', 'HomeController@index');
