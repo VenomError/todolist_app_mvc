@@ -1,7 +1,7 @@
 <?php
 namespace Core;
-use mysqli;
 
+use mysqli;
 
 class Database
 {
@@ -53,7 +53,7 @@ class Database
         return $this;
     }
 
-    public function get(): array
+    public function get()
     {
         $sql = "SELECT $this->fields FROM $this->table";
 
@@ -73,8 +73,22 @@ class Database
         $this->bindParams($stmt);
 
         $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_all(MYSQLI_ASSOC);
+        return $stmt->get_result();
+    }
+
+    public function toArray(): array
+    {
+        $result = $this->get();
+        return $result->fetch_all(MYSQLI_ASSOC); // Mengembalikan array asosiatif
+    }
+
+    public function toObject(): array
+    {
+        $result = $this->get();
+        while ($row = $result->fetch_object()) {
+            $objects[] = $row; // Menyimpan setiap baris sebagai objek
+        }
+        return $objects;
     }
 
     public function insert(array $data): bool
@@ -127,14 +141,8 @@ class Database
     private function bindParams($stmt): void
     {
         if (!empty($this->bindings)) {
-            $types = str_repeat('s', count($this->bindings)); // All bindings are treated as strings for simplicity
+            $types = str_repeat('s', count($this->bindings)); // Semua binding diperlakukan sebagai string
             $stmt->bind_param($types, ...$this->bindings);
         }
     }
-
-    public function all()
-    {
-        return $this->get();
-    }
-
 }

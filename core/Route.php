@@ -21,7 +21,9 @@ class Route
         $uri = parse_url($_SERVER[ 'REQUEST_URI' ], PHP_URL_PATH);
         $method = $_SERVER[ 'REQUEST_METHOD' ];
 
-        $uri = trim($uri, '/');
+        if ($uri != '/') {
+            $uri = trim($uri, '/');
+        }
 
         if (isset(self::$routes[$method])) {
             foreach (self::$routes[$method] as $route => $data) {

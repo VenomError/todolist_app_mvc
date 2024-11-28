@@ -12,7 +12,7 @@ class Auth
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $user = (new User())->where('email', '=', $email)->get();
+        $user = (new User())->where('email', '=', $email)->toArray();
 
         if (empty($user)) {
             return false;
@@ -25,6 +25,7 @@ class Auth
 
         $_SESSION[ 'is_login' ] = true;
         $_SESSION[ 'auth_id' ] = $user[ 'id' ];
+        $_SESSION[ 'auth_role' ] = $user[ 'role' ];
         return true;
 
     }
@@ -47,6 +48,25 @@ class Auth
         }
 
         return isset($_SESSION[ 'is_login' ]) && $_SESSION[ 'is_login' ] === true;
+    }
+
+    public function user()
+    {
+        if ($this->isLoggedIn()) {
+            $user = (new User())->find(session('auth_id'));
+            return $user;
+        }
+
+        return null;
+    }
+
+    public function isAdmin(): bool
+    {
+        $user = $this->user();
+        if ($user->role == 'admin') {
+            return true;
+        }
+        return false;
     }
 
 }

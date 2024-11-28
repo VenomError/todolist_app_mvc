@@ -8,3 +8,5 @@ require_once dirname(__DIR__) . "/route.php";
 
 // Jalankan dispatch untuk menangani rute
 Route::dispatch();
+
+flash()->clear();

@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Controllers;
+use Core\Controller;
+
+class Name extends Controller
+{
+
+    public $layout = 'app';
+    public $title = 'title';
+
+    public function __construct()
+    {
+        $this->isAuthorize = false;
+        $this->authorize = ['admin', 'user'];
+        $this->cekAuthorize();
+    }
+
+
+    public function (){
+        
+    }
+
+}

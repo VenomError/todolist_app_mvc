@@ -20,7 +20,8 @@ class Model extends Database
 
     public function find($id)
     {
-        return $this->where($this->primaryKey, "=", $id)->get();
+        $this->where($this->primaryKey, "=", $id);
+        return $this->get()->fetch_object();
     }
 
     public function create(array $data)

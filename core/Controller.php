@@ -15,7 +15,7 @@ class Controller
         if (file_exists($view)) {
             $this->render($view, $data);
         } else {
-            echo "$view Not not Found";
+            echo "View Not not Found";
         }
     }
 
@@ -31,6 +31,26 @@ class Controller
             include $layoutPath;
         } else {
             include $view;
+        }
+    }
+
+    protected function authorize($isAuthorize = true, $roles = ['admin'])
+    {
+        if ($isAuthorize) {
+            if (auth()->isLoggedIn()) {
+                $user = auth()->user();
+                if (in_array($user->role, $roles)) {
+                    return true;
+                } else {
+                    header('HTTP/1.0 401 Unauthorized');
+                    echo "Unauthorized\n";
+                    exit;
+                }
+            } else {
+                return redirect('login');
+            }
+        } else {
+            return;
         }
     }
 
