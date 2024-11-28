@@ -2,15 +2,11 @@
 
 namespace Core;
 
-use PDO;
+use Core\Database;
+use mysqli;
 
-class Model
+class Model extends Database
 {
-    protected $db;
+    public $table;
 
-    public function __construct()
-    {
-        $this->db = new PDO('mysql:host=localhost;dbname=mvc_project', 'root', '');
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    }
 }

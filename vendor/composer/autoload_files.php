@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'd33df42072fa3f93f455bb4d575d3a3a' => $baseDir . '/config.php',
+    '6d23cdbe49a8a0111ee441bf66912563' => $baseDir . '/global.php',
 );
