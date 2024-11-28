@@ -11,7 +11,13 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::isLoggedIn()) {
-            redirect('admin');
+            $role = Auth::user()->role;
+
+            if ($role == 'admin') {
+                return redirect('admin');
+            } else if ($role == 'user') {
+                return redirect('dashboard');
+            }
         }
         $this->title = 'Login';
         return $this->view("auth/login");
@@ -24,7 +30,15 @@ class AuthController extends Controller
 
         if (Auth::login($email, $password)) {
             addSuccess('login', 'Login Success');
-            return redirect('admin');
+
+            $role = Auth::user()->role;
+
+            if ($role == 'admin') {
+                return redirect('admin');
+            } else if ($role == 'user') {
+                return redirect('dashboard');
+            }
+
         }
 
         addError('login', 'Failed to Login , Invalid Email or Password');

@@ -42,9 +42,7 @@ class Controller
                 if (in_array($user->role, $roles)) {
                     return true;
                 } else {
-                    header('HTTP/1.0 401 Unauthorized');
-                    echo "Unauthorized\n";
-                    exit;
+                    return redirect("error/401");
                 }
             } else {
                 return redirect('login');

@@ -50,9 +50,9 @@ class Auth
         return isset($_SESSION[ 'is_login' ]) && $_SESSION[ 'is_login' ] === true;
     }
 
-    public function user()
+    public static function user()
     {
-        if ($this->isLoggedIn()) {
+        if (self::isLoggedIn()) {
             $user = (new User())->find(session('auth_id'));
             return $user;
         }
@@ -60,9 +60,9 @@ class Auth
         return null;
     }
 
-    public function isAdmin(): bool
+    public static function isAdmin(): bool
     {
-        $user = $this->user();
+        $user = self::user();
         if ($user->role == 'admin') {
             return true;
         }

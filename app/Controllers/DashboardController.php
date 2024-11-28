@@ -3,15 +3,15 @@
 namespace App\Controllers;
 use Core\Controller;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
 
     public $layout = 'app';
-    public $title = 'title';
+    public $title = 'dashboard';
 
     public function __construct()
     {
-        $this->authorize(true);
+        $this->authorize(true, ['user']);
     }
     public function index()
     {

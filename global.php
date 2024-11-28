@@ -35,13 +35,13 @@ function view($view, $data = [], $layout = '')
     return $controller->view($view, $data);
 }
 
-function asset($asset)
+function asset()
 {
     $protocol = isset($_SERVER[ 'HTTPS' ]) && $_SERVER[ 'HTTPS' ] == 'on' ? 'https://' : 'http://';
 
     $url = $_SERVER[ 'HTTP_HOST' ];
 
-    return $protocol . $url . "/$asset";
+    return $protocol . $url . '/';
 }
 
 function redirect($url, $code = '302')

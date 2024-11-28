@@ -7,8 +7,6 @@ class HomeController extends Controller
 {
     public $layout = 'home';
 
-
-
     public function index()
     {
 
