@@ -19,15 +19,14 @@ class Auth
         }
         $user = $user[ 0 ];
 
-        if ($user[ 'password' ] != $password) {
+        if (password_verify($password, $user[ 'password' ])) {
+            $_SESSION[ 'is_login' ] = true;
+            $_SESSION[ 'auth_id' ] = $user[ 'id' ];
+            $_SESSION[ 'auth_role' ] = $user[ 'role' ];
             return false;
         }
 
-        $_SESSION[ 'is_login' ] = true;
-        $_SESSION[ 'auth_id' ] = $user[ 'id' ];
-        $_SESSION[ 'auth_role' ] = $user[ 'role' ];
         return true;
-
     }
 
     public static function logout()

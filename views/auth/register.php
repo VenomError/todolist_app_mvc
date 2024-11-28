@@ -20,13 +20,13 @@
                 <div class="card-body p-4">
                     <div class="text-center mt-2">
                         <h5 class="text-primary">Welcome Back !</h5>
-                        <p class="text-muted">Sign in to continue.</p>
+                        <p class="text-muted">Sign up to continue.</p>
 
-                        <?php if (error('login')) {
+                        <?php if (error('register')) {
                             ?>
                             <div class="alert alert-danger alert-dismissible shadow fade show" role="alert">
                                 <strong>
-                                    <?= errorMessage('login') ?>
+                                    <?= errorMessage('register') ?>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert"
                                         aria-label="Close"></button>
                             </div>
@@ -35,21 +35,39 @@
 
                     </div>
                     <div class="p-2 mt-4">
-                        <form action="/login" method="post">
+                        <form action="/register" method="post">
+
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter Full Name"
+                                    name="name">
+                                <?php
+                                if (error('name')) {
+                                    ?>
+                                    <small class="text-danger"><?= errorMessage('name') ?></small>
+                                    <?php
+                                } ?>
+
+                            </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" placeholder="Enter Email"
-                                    name="email" required>
+                                    name="email">
+                                <?php
+                                if (error('name')) {
+                                    ?>
+                                    <small class="text-danger"><?= errorMessage('name') ?></small>
+                                    <?php
+                                } ?>
+
                             </div>
 
+
+
                             <div class="mb-3">
-                                <!-- <div class="float-end">
-                                    <a href="auth-pass-reset-basic.html" class="text-muted">Forgot
-                                        password?</a>
-                                </div> -->
                                 <label class="form-label" for="password-input">Password</label>
-                                <div class="position-relative auth-pass-inputgroup mb-3">
+                                <div class="position-relative auth-pass-inputgroup ">
                                     <input type="password" class="form-control pe-5 password-input"
                                         placeholder="Enter password" id="password-input" name="password" required>
                                     <button
@@ -57,10 +75,16 @@
                                         type="button" id="password-addon"><i
                                             class="ri-eye-fill align-middle"></i></button>
                                 </div>
+                                <?php
+                                if (error('password')) {
+                                    ?>
+                                    <small class="text-danger"><?= errorMessage('password') ?></small>
+                                    <?php
+                                } ?>
                             </div>
 
                             <div class="mt-4">
-                                <button class="btn btn-success w-100" type="submit">Login</button>
+                                <button class="btn btn-success w-100" type="submit">Register</button>
                             </div>
 
                         </form>
@@ -71,8 +95,8 @@
             <!-- end card -->
 
             <div class="mt-4 text-center">
-                <p class="mb-0">Belum Punya Akun ? <a href="register"
-                        class="fw-semibold text-primary text-decoration-underline"> Register </a> </p>
+                <p class="mb-0">sudah punya akun ? <a href="login"
+                        class="fw-semibold text-primary text-decoration-underline"> Login </a> </p>
             </div>
 
         </div>
@@ -82,9 +106,14 @@
     <script>
         const notyf = new Notyf();
         <?php
-        if (success('login')) {
+        if (success('register')) {
             ?>
-            notyf.success('<?= successMessage('login') ?>');
+            notyf.success('<?= successMessage('register') ?>');
+        <?php } ?>
+        <?php
+        if (error('register')) {
+            ?>
+            notyf.error('<?= errorMessage('register') ?>');
         <?php } ?>
     </script>
 </div>
