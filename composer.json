@@ -1,0 +1,20 @@
+{
+    "name": "venom_error/todo-list",
+    "description": "tugas praktikum web native",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Core\\": "core/"
+        },
+        "files": [
+            "config.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "VenomError",
+            "email": "venoms00001@gmail.com"
+        }
+    ],
+    "require": {}
+}
