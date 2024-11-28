@@ -7,34 +7,25 @@ class Route
     protected static $routes = [];
     protected static $middlewares = [];
 
-    // Store GET routes
     public static function get($uri, $action, $middlewares = [])
     {
         self::$routes[ 'GET' ][$uri] = ['action' => $action, 'middlewares' => $middlewares];
     }
-
-    // Store POST routes
     public static function post($uri, $action, $middlewares = [])
     {
         self::$routes[ 'POST' ][$uri] = ['action' => $action, 'middlewares' => $middlewares];
     }
 
-    // Dispatch the route based on the current URI and method
     public static function dispatch()
     {
         $uri = parse_url($_SERVER[ 'REQUEST_URI' ], PHP_URL_PATH);
         $method = $_SERVER[ 'REQUEST_METHOD' ];
 
-        // Trim leading slash for comparison
         $uri = trim($uri, '/');
 
-        // Check if we have any routes for this HTTP method
         if (isset(self::$routes[$method])) {
-            // Loop through each route to match
             foreach (self::$routes[$method] as $route => $data) {
-                // Check if the route matches
                 if (self::matchRoute($uri, $route, $params)) {
-                    // Apply middlewares
                     if (isset($data[ 'middlewares' ])) {
                         foreach ($data[ 'middlewares' ] as $middleware) {
                             // Check if the middleware class exists and is callable
@@ -89,7 +80,6 @@ class Route
         }
     }
 
-    // Match the route with the URI and extract parameters
     private static function matchRoute($uri, $route, &$params)
     {
         // Convert route parameters (like {id}, {name}) to regex patterns

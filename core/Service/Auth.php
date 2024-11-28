@@ -23,7 +23,7 @@ class Auth
             return false;
         }
 
-        $_SESSION[ 'is_logged_in' ] = true;
+        $_SESSION[ 'is_login' ] = true;
         $_SESSION[ 'auth_id' ] = $user[ 'id' ];
         return true;
 
@@ -46,7 +46,7 @@ class Auth
             session_start();
         }
 
-        return isset($_SESSION[ 'is_logged_in' ]) && $_SESSION[ 'is_logged_in' ] === true;
+        return isset($_SESSION[ 'is_login' ]) && $_SESSION[ 'is_login' ] === true;
     }
 
 }
