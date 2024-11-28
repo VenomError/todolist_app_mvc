@@ -21,7 +21,6 @@ class Database
         }
     }
 
-
     public function table(string $table): self
     {
         $this->table = $table;

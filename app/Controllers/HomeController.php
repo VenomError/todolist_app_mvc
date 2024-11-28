@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Form\UserForm;
+use Core\Database;
 use App\Models\User;
 use Core\Controller;
+use Core\Service\Auth;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,12 @@ class HomeController extends Controller
     public $title = "tes";
     public function index()
     {
+        $email = 'user@ssgmail.com';
+        $password = 'passwssord';
 
+        $login = Auth::login($email, $password);
+
+        // var_dump($id, $name);
     }
 
 }
