@@ -12,6 +12,7 @@ class Database
     private $bindings = [];
     private $limit;
     private $orderBy;
+    private $joins = []; // Tambahkan properti untuk menyimpan klausa JOIN
 
     public function __construct()
     {
@@ -53,9 +54,20 @@ class Database
         return $this;
     }
 
+    public function join(string $table, string $on, string $type = 'INNER'): self
+    {
+        $this->joins[] = "$type JOIN $table ON $on";
+        return $this;
+    }
+
     public function get()
     {
         $sql = "SELECT $this->fields FROM $this->table";
+
+        // Tambahkan klausa JOIN jika ada
+        if (!empty($this->joins)) {
+            $sql .= ' ' . implode(' ', $this->joins);
+        }
 
         if (!empty($this->conditions)) {
             $sql .= ' WHERE ' . implode(' AND ', $this->conditions);
@@ -144,5 +156,24 @@ class Database
             $types = str_repeat('s', count($this->bindings)); // Semua binding diperlakukan sebagai string
             $stmt->bind_param($types, ...$this->bindings);
         }
+    }
+
+    public function rawQuery(string $sql, array $bindings = [])
+    {
+        $stmt = $this->mysqli->prepare($sql);
+
+        // Bind parameters jika ada
+        if (!empty($bindings)) {
+            $types = str_repeat('s', count($bindings));
+            $stmt->bind_param($types, ...$bindings);
+        }
+
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function count()
+    {
+        return $this->get()->num_rows;
     }
 }

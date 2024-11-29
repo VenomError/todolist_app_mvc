@@ -24,7 +24,10 @@
     <link href="<?= asset() ?>assets/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="<?= asset() ?>assets/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css">
 
 </head>
 
@@ -101,6 +104,14 @@
 
     <!-- App js -->
     <script src="<?= asset() ?>assets/js/app.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src=" https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src=" https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+
+    <script>
+        new DataTable('#taskTable');
+    </script>
 </body>
 
 

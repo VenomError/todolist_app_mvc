@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Tasks;
 use Core\Controller;
 
 class TaskController extends Controller

@@ -147,3 +147,48 @@ function getUri()
     $uri = $_SERVER[ 'REQUEST_URI' ];
     return trim($uri, '/');
 }
+
+function component($path)
+{
+    $base_path = BASE_PATH;
+    $component = $base_path . "/views/components/$path.php";
+    if (file_exists($component)) {
+        return include $component;
+    } else {
+        return null;
+    }
+}
+
+function formatDate($date, $format = 'd M, Y')
+{
+    return date_format(date_create($date), $format);
+}
+function statusColor($status)
+{
+    switch ($status) {
+        case 'new':
+            return 'success';
+        case 'inprogress':
+            return 'warning';
+        case 'completed':
+            return 'primary';
+        case 'pending':
+            return 'danger';
+        default:
+            return 'secondary';
+    }
+}
+
+function priorityColor($priority)
+{
+    switch ($priority) {
+        case 'low':
+            return 'success';
+        case 'medium':
+            return 'warning';
+        case 'high':
+            return 'danger';
+        default:
+            return 'primary';
+    }
+}

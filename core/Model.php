@@ -30,14 +30,4 @@ class Model extends Database
     }
 
 
-    public static function __callStatic($method, $arguments)
-    {
-        $instance = new static();  // Buat instance dari kelas yang memanggil
-        if (method_exists($instance, $method)) {
-            return $instance->$method(...$arguments);  // Panggil metode pada instance
-        }
-
-        throw new \BadMethodCallException("Method $method does not exist in " . static::class);
-    }
-
 }
