@@ -15,7 +15,7 @@ class DashboardController extends Controller
     }
     public function index()
     {
-        echo auth()->user()->role;
+        return $this->view('dashboard/index');
     }
 
 }

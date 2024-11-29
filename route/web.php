@@ -2,6 +2,7 @@
 
 use Core\Route;
 require dirname(__DIR__) . "/route/error.php";
+require dirname(__DIR__) . "/route/dashboard.php";
 
 Route::get('/', 'HomeController@index');
 // authentication
@@ -14,4 +15,3 @@ Route::post('register', 'AuthController@authRegister');
 Route::get('logout', 'AuthController@logout');
 
 Route::get('admin', 'AdminController@index');
-Route::get('dashboard', 'DashboardController@index');

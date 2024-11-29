@@ -126,3 +126,24 @@ function session($key)
 {
     return $_SESSION[$key];
 }
+
+function config($fileName)
+{
+    $config = BASE_PATH . "/config/" . $fileName . ".php";
+    if (file_exists($config)) {
+        return include $config;
+    } else {
+        return null;
+    }
+}
+function url($add)
+{
+    $base_url = BASE_URL;
+    return $base_url . "$add";
+}
+
+function getUri()
+{
+    $uri = $_SERVER[ 'REQUEST_URI' ];
+    return trim($uri, '/');
+}
